@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
+import { GlobalStyle } from './components/GlobalStyle'
+import { Wrapper } from './components/Wrapper'
+import { Title } from './components/Title'
+import { Input, InputBox } from './components/Input'
 
 function App() {
-  console.log('33')
   const [count, setCount] = useState(0)
   const { register, handleSubmit, setValue, watch } = useForm()
   const onSubmit = (data) => console.log('1111', data)
@@ -18,17 +22,18 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <Wrapper>
+      <GlobalStyle />
       <div className="first-block">
-        <h1>Заполните форму</h1>
+        <Title>Заполните форму</Title>
       </div>
       <form
         style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label htmlFor="first">ФИО</label>
-          <input
+        <InputBox>
+          <label htmlFor="firstName">ФИО</label>
+          <Input
             {...register('firstName', {
               required: true,
               minLength: 10,
@@ -38,13 +43,13 @@ function App() {
             onChange={handleInputNameChange}
             placeholder="Заполнить"
             type="text"
-            id="first"
+            id="firstName"
           />
-        </div>
+        </InputBox>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <InputBox>
           <label htmlFor="second">Рейтинг</label>
-          <input
+          <Input
             {...register('rating', {
               required: true,
               min: 0,
@@ -54,25 +59,25 @@ function App() {
             type="number"
             id="second"
           />
-        </div>
+        </InputBox>
 
         <div>
           <input type="checkbox" />
           <label htmlFor="second">Имеется аккредитация</label>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <InputBox>
           <label htmlFor="second">Желаемая сумма</label>
-          <input
+          <Input
             {...register('sum', {
               required: true,
             })}
             placeholder="0"
             type="number"
           />
-        </div>
+        </InputBox>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <InputBox>
           <label htmlFor="second">Категория</label>
           <select name="ff" id="a">
             <option value="" disabled selected>
@@ -84,18 +89,18 @@ function App() {
             <option value="4">Категория 4</option>
             <option value="5">Категория 5</option>
           </select>
-        </div>
+        </InputBox>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <InputBox>
           <label htmlFor="second">Комментарий</label>
-          <input
+          <Input
             {...register('comment', {
               maxLength: 200,
             })}
             placeholder="Заполнить"
             type="text"
           />
-        </div>
+        </InputBox>
 
         <label style={{ height: '136px', border: '1px solid' }} htmlFor="file">
           Нажмите на область или перетащите файлы сюда. 5 МБ максимальный размер{' '}
@@ -106,7 +111,7 @@ function App() {
 
         <button type="submit">Отправить</button>
       </form>
-    </div>
+    </Wrapper>
   )
 }
 
