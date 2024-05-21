@@ -6,18 +6,27 @@ import { GlobalStyle } from './components/GlobalStyle'
 import { Wrapper } from './components/Wrapper'
 import { Title } from './components/Title'
 import { Input, InputBox } from './components/Input'
+import { Error } from './components/ErrorMessage'
 
 function App() {
   const [count, setCount] = useState(0)
-  const { register, handleSubmit, setValue, watch } = useForm()
+  const errorMessage = 'Введите корректное значение'
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors, isValid },
+  } = useForm()
   const onSubmit = (data) => console.log('1111', data)
+  console.log('3333', isValid)
 
-  const inputNameValue = watch('firstName', '')
+  const inputNameValue = watch('name', '')
 
   const handleInputNameChange = (e) => {
     const { value } = e.target
     if (value.length <= 30) {
-      setValue('firstName', value)
+      setValue('name', value)
     }
   }
 
@@ -32,9 +41,9 @@ function App() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <InputBox>
-          <label htmlFor="firstName">ФИО</label>
+          <label htmlFor="name">ФИО</label>
           <Input
-            {...register('firstName', {
+            {...register('name', {
               required: true,
               minLength: 10,
               maxLength: 30,
@@ -43,12 +52,14 @@ function App() {
             onChange={handleInputNameChange}
             placeholder="Заполнить"
             type="text"
-            id="firstName"
+            id="name"
+            isError={errors.name}
           />
+          {errors.name && <Error>{errorMessage}</Error>}
         </InputBox>
 
         <InputBox>
-          <label htmlFor="second">Рейтинг</label>
+          <label htmlFor="rating">Рейтинг</label>
           <Input
             {...register('rating', {
               required: true,
@@ -57,8 +68,10 @@ function App() {
             })}
             placeholder="Введите значение от 1 до 100"
             type="number"
-            id="second"
+            id="rating"
+            isError={errors.rating}
           />
+          {errors.rating && <Error>{errorMessage}</Error>}
         </InputBox>
 
         <div>
@@ -67,14 +80,16 @@ function App() {
         </div>
 
         <InputBox>
-          <label htmlFor="second">Желаемая сумма</label>
+          <label htmlFor="sum">Желаемая сумма</label>
           <Input
             {...register('sum', {
               required: true,
             })}
             placeholder="0"
             type="number"
+            id="sum"
           />
+          {errors.sum && <Error>{errorMessage}</Error>}
         </InputBox>
 
         <InputBox>
@@ -89,6 +104,7 @@ function App() {
             <option value="4">Категория 4</option>
             <option value="5">Категория 5</option>
           </select>
+          {errors.sum && <Error>{errorMessage}</Error>}
         </InputBox>
 
         <InputBox>

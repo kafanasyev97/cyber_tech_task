@@ -8,9 +8,17 @@ export const InputBox = styled.div`
 
 const InputStyled = styled.input`
   height: 44px;
+  padding: 10px 12px;
+  border: ${(props) => (props.isError ? '1px solid #ff4b24' : 'none')};
+  border-radius: 6px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #228b62;
+  }
 `
 
 export const Input = (props) => {
-  console.log('22', props)
+  console.log('555', props.isError)
   return <InputStyled {...props}></InputStyled>
 }
