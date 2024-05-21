@@ -11,10 +11,54 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background-color: #2e2e36;
+  font-family: 'Jost';
+  font-weight: 400;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+label {
+  font-size: 14px;
+  line-height: 18px;
+  color: #9394aa;
+}
+
+label:after {
+  content: '*';
+  color: red;
+}
+
+input,
+select {
+  height: 44px;
+}
+
+.first-block {
+  padding: 12px 0;
+  font-size: 28px;
+  line-height: 24px;
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 538px;
+  padding: 24px;
+  background-color: #eff2f5;
+  border-radius: 12px;
+  margin: 30px auto;
   gap: 20px;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
 }
