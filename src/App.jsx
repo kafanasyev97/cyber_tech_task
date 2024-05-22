@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { GlobalStyle } from './components/GlobalStyle'
 import { Wrapper } from './components/Wrapper'
 import { Title } from './components/Title'
-import { Input, InputBox } from './components/Input'
+import { Input, InputBox, InputCheckbox } from './components/Input'
 import { Error } from './components/ErrorMessage'
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
     handleSubmit,
     setValue,
     watch,
+    clearErrors,
     formState: { errors, isValid },
   } = useForm()
   const onSubmit = (data) => console.log('1111', data)
@@ -27,7 +28,14 @@ function App() {
     const { value } = e.target
     if (value.length <= 30) {
       setValue('name', value)
+      clearErrors('name')
     }
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setValue(name, value)
+    clearErrors(name)
   }
 
   return (
@@ -70,13 +78,14 @@ function App() {
             type="number"
             id="rating"
             isError={errors.rating}
+            onChange={handleInputChange}
           />
           {errors.rating && <Error>{errorMessage}</Error>}
         </InputBox>
 
         <div>
-          <input type="checkbox" />
-          <label htmlFor="second">Имеется аккредитация</label>
+          <InputCheckbox />
+          <label htmlFor="isAccreditation">Имеется аккредитация</label>
         </div>
 
         <InputBox>
@@ -88,6 +97,8 @@ function App() {
             placeholder="0"
             type="number"
             id="sum"
+            isError={errors.sum}
+            onChange={handleInputChange}
           />
           {errors.sum && <Error>{errorMessage}</Error>}
         </InputBox>

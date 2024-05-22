@@ -6,6 +6,15 @@ export const InputBox = styled.div`
   gap: 4px;
 `
 
+export const InputCheckbox = styled.input.attrs({
+  type: 'checkbox',
+  id: 'isAccreditation',
+})`
+  &:checked {
+    background-color: #228b62;
+  }
+`
+
 const InputStyled = styled.input`
   height: 44px;
   padding: 10px 12px;
@@ -19,6 +28,5 @@ const InputStyled = styled.input`
 `
 
 export const Input = (props) => {
-  console.log('555', props.isError)
   return <InputStyled {...props}></InputStyled>
 }
