@@ -83,10 +83,10 @@ function App() {
           {errors.rating && <Error>{errorMessage}</Error>}
         </InputBox>
 
-        <div>
-          <InputCheckbox />
-          <label htmlFor="isAccreditation">Имеется аккредитация</label>
-        </div>
+        <InputCheckbox>
+          <input type="checkbox" id="checkbox" />
+          <label htmlFor="checkbox">Имеется аккредитация</label>
+        </InputCheckbox>
 
         <InputBox>
           <label htmlFor="sum">Желаемая сумма</label>
